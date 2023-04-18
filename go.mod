@@ -1,4 +1,4 @@
-module kvs
+module gitea.tursom.cn/tursom/kvs
 
 go 1.20
 
