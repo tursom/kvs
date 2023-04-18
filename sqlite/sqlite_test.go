@@ -7,7 +7,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/tursom/GoCollections/exceptions"
 
-	"kvs/kv"
+	"gitea.tursom.cn/tursom/kvs/kv"
 )
 
 func Test_sqliteKVS(t *testing.T) {

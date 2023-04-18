@@ -5,7 +5,7 @@ import (
 
 	"github.com/syndtr/goleveldb/leveldb"
 
-	"kvs/kv"
+	"gitea.tursom.cn/tursom/kvs/kv"
 )
 
 func Test_leveldbKVS(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 	"github.com/tursom/GoCollections/exceptions"
 	"github.com/tursom/GoCollections/lang"
 
-	"kvs/kv"
+	"gitea.tursom.cn/tursom/kvs/kv"
 )
 
 type (
