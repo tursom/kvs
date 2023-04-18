@@ -39,11 +39,11 @@ func FixedLengthCodec(frameLength uint32) Codec[io.Reader, []byte] {
 	return &fixedLengthCodec{frameLength: frameLength}
 }
 
-func (r *readerCodec[V]) encode(v2 V) io.Reader {
+func (r *readerCodec[V]) Encode(v2 V) io.Reader {
 	return bytes.NewReader(r.codec.Encode(v2))
 }
 
-func (r *readerCodec[V]) decode(v1 io.Reader) V {
+func (r *readerCodec[V]) Decode(v1 io.Reader) V {
 	all, err := io.ReadAll(v1)
 	if err != nil {
 		panic(exceptions.Package(err))
@@ -52,11 +52,11 @@ func (r *readerCodec[V]) decode(v1 io.Reader) V {
 	return r.codec.Decode(all)
 }
 
-func (f *fixedLengthCodec) encode(v2 []byte) io.Reader {
+func (f *fixedLengthCodec) Encode(v2 []byte) io.Reader {
 	return bytes.NewReader(v2)
 }
 
-func (f *fixedLengthCodec) decode(v1 io.Reader) []byte {
+func (f *fixedLengthCodec) Decode(v1 io.Reader) []byte {
 	bs := make([]byte, f.frameLength)
 	n, err := v1.Read(bs)
 	if err != nil {
@@ -66,7 +66,7 @@ func (f *fixedLengthCodec) decode(v1 io.Reader) []byte {
 	return bs[0:n]
 }
 
-func (l *lengthFieldCodec) encode(v2 []byte) io.Reader {
+func (l *lengthFieldCodec) Encode(v2 []byte) io.Reader {
 	buffer := bytes.NewBuffer(nil)
 
 	_ = binary.Write(buffer, binary.BigEndian, uint32(len(v2)))
@@ -75,7 +75,7 @@ func (l *lengthFieldCodec) encode(v2 []byte) io.Reader {
 	return buffer
 }
 
-func (l *lengthFieldCodec) decode(v1 io.Reader) []byte {
+func (l *lengthFieldCodec) Decode(v1 io.Reader) []byte {
 	var length uint32
 	if err := binary.Read(v1, binary.BigEndian, &length); err != nil {
 		panic(exceptions.Package(err))
