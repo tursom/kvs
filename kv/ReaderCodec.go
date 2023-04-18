@@ -40,7 +40,7 @@ func FixedLengthCodec(frameLength uint32) Codec[io.Reader, []byte] {
 }
 
 func (r *readerCodec[V]) encode(v2 V) io.Reader {
-	return bytes.NewReader(r.codec.encode(v2))
+	return bytes.NewReader(r.codec.Encode(v2))
 }
 
 func (r *readerCodec[V]) decode(v1 io.Reader) V {
@@ -49,7 +49,7 @@ func (r *readerCodec[V]) decode(v1 io.Reader) V {
 		panic(exceptions.Package(err))
 	}
 
-	return r.codec.decode(all)
+	return r.codec.Decode(all)
 }
 
 func (f *fixedLengthCodec) encode(v2 []byte) io.Reader {

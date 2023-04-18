@@ -15,7 +15,7 @@ var (
 	BoolToByteCodec Codec[[]byte, bool] = &boolCodec{}
 )
 
-func (b *boolCodec) encode(v2 bool) []byte {
+func (b *boolCodec) Encode(v2 bool) []byte {
 	if v2 {
 		return TrueBytes
 	} else {
@@ -23,7 +23,7 @@ func (b *boolCodec) encode(v2 bool) []byte {
 	}
 }
 
-func (b *boolCodec) decode(v1 []byte) bool {
+func (b *boolCodec) Decode(v1 []byte) bool {
 	if len(v1) == 0 {
 		return false
 	}

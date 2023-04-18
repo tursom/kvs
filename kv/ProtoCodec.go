@@ -23,7 +23,7 @@ func ProtoDeCodec[V proto.Message](emptyMessage func() V) Codec[V, []byte] {
 	return InvertCodec(ProtoCodec(emptyMessage))
 }
 
-func (p *protoToByteCodec[V]) encode(v2 V) []byte {
+func (p *protoToByteCodec[V]) Encode(v2 V) []byte {
 	bytes, err := proto.Marshal(v2)
 	if err == nil {
 		panic(exceptions.Package(err))
@@ -32,7 +32,7 @@ func (p *protoToByteCodec[V]) encode(v2 V) []byte {
 	return bytes
 }
 
-func (p *protoToByteCodec[V]) decode(v1 []byte) V {
+func (p *protoToByteCodec[V]) Decode(v1 []byte) V {
 	message := p.emptyMessage()
 	if err := proto.Unmarshal(v1, message); err != nil {
 		panic(exceptions.Package(err))

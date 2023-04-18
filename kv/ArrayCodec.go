@@ -21,10 +21,10 @@ func ArrayCodec[V any](codec Codec[io.Reader, V]) Codec[[]byte, []V] {
 	return &arrayCodec[V]{codec: codec}
 }
 
-func (a *arrayCodec[V]) encode(v2 []V) []byte {
+func (a *arrayCodec[V]) Encode(v2 []V) []byte {
 	var bs []byte
 	for _, v := range v2 {
-		encode := a.codec.encode(v)
+		encode := a.codec.Encode(v)
 		all, err := io.ReadAll(encode)
 		if err != nil {
 			panic(exceptions.Package(err))
@@ -36,7 +36,7 @@ func (a *arrayCodec[V]) encode(v2 []V) []byte {
 	return bs
 }
 
-func (a *arrayCodec[V]) decode(v1 []byte) []V {
+func (a *arrayCodec[V]) Decode(v1 []byte) []V {
 	if len(v1) == 0 {
 		return []V{}
 	}
@@ -48,7 +48,7 @@ func (a *arrayCodec[V]) decode(v1 []byte) []V {
 	for func() bool {
 		defer recover()
 
-		v := a.codec.decode(reader)
+		v := a.codec.Decode(reader)
 		values = append(values, v)
 
 		return reader.Len() > 0

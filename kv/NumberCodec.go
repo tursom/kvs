@@ -73,11 +73,11 @@ var (
 	ByteToComplex128Codec                           = InvertCodec[complex128, []byte](&complex128ToByteCodec{})
 )
 
-func (u *int8ToByteCodec) encode(v2 int8) []byte {
+func (u *int8ToByteCodec) Encode(v2 int8) []byte {
 	return []byte{byte(v2)}
 }
 
-func (u *int8ToByteCodec) decode(v1 []byte) int8 {
+func (u *int8ToByteCodec) Decode(v1 []byte) int8 {
 	if len(v1) == 0 {
 		return 0
 	}
@@ -85,11 +85,11 @@ func (u *int8ToByteCodec) decode(v1 []byte) int8 {
 	return int8(v1[0])
 }
 
-func (u *int16ToByteCodec) encode(v2 int16) []byte {
+func (u *int16ToByteCodec) Encode(v2 int16) []byte {
 	return binary.BigEndian.AppendUint16(nil, uint16(v2))
 }
 
-func (u *int16ToByteCodec) decode(v1 []byte) int16 {
+func (u *int16ToByteCodec) Decode(v1 []byte) int16 {
 	if len(v1) == 0 {
 		return 0
 	}
@@ -97,11 +97,11 @@ func (u *int16ToByteCodec) decode(v1 []byte) int16 {
 	return int16(binary.BigEndian.Uint16(v1))
 }
 
-func (u *int32ToByteCodec) encode(v2 int32) []byte {
+func (u *int32ToByteCodec) Encode(v2 int32) []byte {
 	return binary.BigEndian.AppendUint32(nil, uint32(v2))
 }
 
-func (u *int32ToByteCodec) decode(v1 []byte) int32 {
+func (u *int32ToByteCodec) Decode(v1 []byte) int32 {
 	if len(v1) == 0 {
 		return 0
 	}
@@ -109,11 +109,11 @@ func (u *int32ToByteCodec) decode(v1 []byte) int32 {
 	return int32(binary.BigEndian.Uint32(v1))
 }
 
-func (u *int64ToByteCodec) encode(v2 int64) []byte {
+func (u *int64ToByteCodec) Encode(v2 int64) []byte {
 	return binary.BigEndian.AppendUint64(nil, uint64(v2))
 }
 
-func (u *int64ToByteCodec) decode(v1 []byte) int64 {
+func (u *int64ToByteCodec) Decode(v1 []byte) int64 {
 	if len(v1) == 0 {
 		return 0
 	}
@@ -121,11 +121,11 @@ func (u *int64ToByteCodec) decode(v1 []byte) int64 {
 	return int64(binary.BigEndian.Uint64(v1))
 }
 
-func (u *uint8ToByteCodec) encode(v2 uint8) []byte {
+func (u *uint8ToByteCodec) Encode(v2 uint8) []byte {
 	return []byte{v2}
 }
 
-func (u *uint8ToByteCodec) decode(v1 []byte) uint8 {
+func (u *uint8ToByteCodec) Decode(v1 []byte) uint8 {
 	if len(v1) == 0 {
 		return 0
 	}
@@ -133,11 +133,11 @@ func (u *uint8ToByteCodec) decode(v1 []byte) uint8 {
 	return v1[0]
 }
 
-func (u *uint16ToByteCodec) encode(v2 uint16) []byte {
+func (u *uint16ToByteCodec) Encode(v2 uint16) []byte {
 	return binary.BigEndian.AppendUint16(nil, v2)
 }
 
-func (u *uint16ToByteCodec) decode(v1 []byte) uint16 {
+func (u *uint16ToByteCodec) Decode(v1 []byte) uint16 {
 	if len(v1) == 0 {
 		return 0
 	}
@@ -145,11 +145,11 @@ func (u *uint16ToByteCodec) decode(v1 []byte) uint16 {
 	return binary.BigEndian.Uint16(v1)
 }
 
-func (u *uint32ToByteCodec) encode(v2 uint32) []byte {
+func (u *uint32ToByteCodec) Encode(v2 uint32) []byte {
 	return binary.BigEndian.AppendUint32(nil, v2)
 }
 
-func (u *uint32ToByteCodec) decode(v1 []byte) uint32 {
+func (u *uint32ToByteCodec) Decode(v1 []byte) uint32 {
 	if len(v1) == 0 {
 		return 0
 	}
@@ -157,11 +157,11 @@ func (u *uint32ToByteCodec) decode(v1 []byte) uint32 {
 	return binary.BigEndian.Uint32(v1)
 }
 
-func (u *uint64ToByteCodec) encode(v2 uint64) []byte {
+func (u *uint64ToByteCodec) Encode(v2 uint64) []byte {
 	return binary.BigEndian.AppendUint64(nil, v2)
 }
 
-func (u *uint64ToByteCodec) decode(v1 []byte) uint64 {
+func (u *uint64ToByteCodec) Decode(v1 []byte) uint64 {
 	if len(v1) == 0 {
 		return 0
 	}
@@ -169,11 +169,11 @@ func (u *uint64ToByteCodec) decode(v1 []byte) uint64 {
 	return binary.BigEndian.Uint64(v1)
 }
 
-func (u *float32ToByteCodec) encode(v2 float32) []byte {
+func (u *float32ToByteCodec) Encode(v2 float32) []byte {
 	return binary.BigEndian.AppendUint32(nil, *(*uint32)(unsafe.Pointer(&v2)))
 }
 
-func (u *float32ToByteCodec) decode(v1 []byte) float32 {
+func (u *float32ToByteCodec) Decode(v1 []byte) float32 {
 	if len(v1) == 0 {
 		return 0
 	}
@@ -182,11 +182,11 @@ func (u *float32ToByteCodec) decode(v1 []byte) float32 {
 	return *(*float32)(unsafe.Pointer(&u2))
 }
 
-func (u *float64ToByteCodec) encode(v2 float64) []byte {
+func (u *float64ToByteCodec) Encode(v2 float64) []byte {
 	return binary.BigEndian.AppendUint64(nil, *(*uint64)(unsafe.Pointer(&v2)))
 }
 
-func (u *float64ToByteCodec) decode(v1 []byte) float64 {
+func (u *float64ToByteCodec) Decode(v1 []byte) float64 {
 	if len(v1) == 0 {
 		return 0
 	}
@@ -195,11 +195,11 @@ func (u *float64ToByteCodec) decode(v1 []byte) float64 {
 	return *(*float64)(unsafe.Pointer(&u2))
 }
 
-func (u *complex64ToByteCodec) encode(v2 complex64) []byte {
+func (u *complex64ToByteCodec) Encode(v2 complex64) []byte {
 	return binary.BigEndian.AppendUint64(nil, *(*uint64)(unsafe.Pointer(&v2)))
 }
 
-func (u *complex64ToByteCodec) decode(v1 []byte) complex64 {
+func (u *complex64ToByteCodec) Decode(v1 []byte) complex64 {
 	if len(v1) == 0 {
 		return 0
 	}
@@ -208,7 +208,7 @@ func (u *complex64ToByteCodec) decode(v1 []byte) complex64 {
 	return *(*complex64)(unsafe.Pointer(&u2))
 }
 
-func (u *complex128ToByteCodec) encode(v2 complex128) []byte {
+func (u *complex128ToByteCodec) Encode(v2 complex128) []byte {
 	r := real(v2)
 	i := imag(v2)
 
@@ -220,7 +220,7 @@ func (u *complex128ToByteCodec) encode(v2 complex128) []byte {
 	return bytes
 }
 
-func (u *complex128ToByteCodec) decode(v1 []byte) complex128 {
+func (u *complex128ToByteCodec) Decode(v1 []byte) complex128 {
 	if len(v1) == 0 {
 		return 0
 	}
