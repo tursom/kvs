@@ -27,4 +27,13 @@ func Test_sqliteKVS(t *testing.T) {
 	if exception != nil || value != "world!" {
 		t.Fatal(value, exception)
 	}
+
+	if exception = skvs.Delete("hello"); exception != nil {
+		t.Fatal(value, exception)
+	}
+
+	value, exception = skvs.Get("hello")
+	if exception != nil || value != "" {
+		t.Fatal(value, exception)
+	}
 }

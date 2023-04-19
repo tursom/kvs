@@ -26,3 +26,8 @@ func (m *mapKvs) Put(key string, value []byte) exceptions.Exception {
 func (m *mapKvs) Get(key string) ([]byte, exceptions.Exception) {
 	return m.m[key], nil
 }
+
+func (m *mapKvs) Delete(key string) exceptions.Exception {
+	delete(m.m, key)
+	return nil
+}

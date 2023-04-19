@@ -35,3 +35,11 @@ func (l *leveldbKVS) Get(key []byte) ([]byte, exceptions.Exception) {
 
 	return value, nil
 }
+
+func (l *leveldbKVS) Delete(key []byte) exceptions.Exception {
+	if err := l.db.Delete(key, nil); err != nil {
+		return exceptions.Package(err)
+	}
+
+	return nil
+}

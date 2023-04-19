@@ -88,3 +88,11 @@ func (s *sqliteKVS) Put(key []byte, value []byte) exceptions.Exception {
 
 	return nil
 }
+
+func (s *sqliteKVS) Delete(key []byte) exceptions.Exception {
+	if _, err := s.db.Exec("delete from "+s.table+" where k=?", key); err != nil {
+		return exceptions.Package(err)
+	}
+
+	return nil
+}

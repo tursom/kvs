@@ -10,5 +10,6 @@ type (
 		lang.Object
 		Put(key K, value V) exceptions.Exception
 		Get(key K) (V, exceptions.Exception)
+		Delete(key K) exceptions.Exception
 	}
 )

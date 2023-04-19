@@ -86,12 +86,20 @@ func (c *codecStore[K1, K2, V1, V2]) Get(key K2) (V2, exceptions.Exception) {
 	return c.vCodec.Decode(value), nil
 }
 
+func (c *codecStore[K1, K2, V1, V2]) Delete(key K2) exceptions.Exception {
+	return c.kvs.Delete(c.kCodec.Encode(key))
+}
+
 func (c *kCodecStore[K1, K2, V]) Put(key K2, value V) exceptions.Exception {
 	return c.kvs.Put(c.codec.Encode(key), value)
 }
 
 func (c *kCodecStore[K1, K2, V]) Get(key K2) (V, exceptions.Exception) {
 	return c.kvs.Get(c.codec.Encode(key))
+}
+
+func (c *kCodecStore[K1, K2, V]) Delete(key K2) exceptions.Exception {
+	return c.kvs.Delete(c.codec.Encode(key))
 }
 
 func (c *vCodecStore[K, V1, V2]) Put(key K, value V2) exceptions.Exception {
@@ -105,6 +113,10 @@ func (c *vCodecStore[K, V1, V2]) Get(key K) (V2, exceptions.Exception) {
 	}
 
 	return c.codec.Decode(get), nil
+}
+
+func (c *vCodecStore[K, V1, V2]) Delete(key K) exceptions.Exception {
+	return c.kvs.Delete(key)
 }
 
 func (i *invertCodec[V1, V2]) Encode(v2 V2) V1 {
