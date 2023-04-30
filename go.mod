@@ -1,11 +1,11 @@
-module gitea.tursom.cn/tursom/kvs
+module github.com/tursom/kvs
 
 go 1.20
 
 require (
 	github.com/mattn/go-sqlite3 v1.14.16
 	github.com/syndtr/goleveldb v1.0.0
-	github.com/tursom/GoCollections v0.2.7
+	github.com/tursom/GoCollections v0.3.8
 	google.golang.org/protobuf v1.30.0
 )
 
